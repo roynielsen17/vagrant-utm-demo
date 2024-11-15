@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d/
+    networks:
+      - app_network
+
+  api1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:  # Use args to pass API_VERSION at build time
+        API_VERSION: ${TAG}  
+    image: flask-api:${TAG}  # Use TAG directly here for versioning
+    container_name: flask_api1
+    environment:
+      FLASK_APP: app.py
+      DB_URL: ${DB_URL}
+      MIGRATIONS: "true"
+    ports:
+      - "8081:5000"
+    depends_on:
+      - mysql
+    networks:
+      - app_network
+
+  api2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        API_VERSION: ${TAG}  
+    image: flask-api:${TAG}
+    container_name: flask_api2
+    environment:
+      FLASK_APP: app.py
+      DB_URL: ${DB_URL}
+      MIGRATIONS: "true"
+    ports:
+      - "8082:5000"
+    depends_on:
+      - mysql
+    networks:
+      - app_network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - app_network
+
+volumes:
+  mysql_data:
+    name: mysql_data
+
+networks:
+  app_network:
+    name: app_network
