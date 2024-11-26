@@ -1,7 +1,6 @@
 # How to Use UTM Hypervisor with Vagrant for Local Development Setups
-
-We want to deploy our REST API along with its dependent services. For this, you need to spin up a Vagrant box using Vagrantfile. Treat this vagrant box as your production environment.
-
+This repository serves as a demo location , for those who would want to try setting up Vagrant-UTM Hands on:
+Article Link - <will be inserted later> 
 ## Prerequisites
 Before getting started, ensure you have the following prerequisites:
 
