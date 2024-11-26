@@ -69,8 +69,3 @@ bridge100: flags=8a63<UP,BROADCAST,SMART,RUNNING,ALLMULTI,SIMPLEX,MULTICAST> mtu
         media: autoselect
         status: active
 ```
-
-### Issues Reported - Opening Issue to be linked for next PR
-- **Inconsistent Schema Apply** 2nd Flask API Container - Complaints About Alembic Table Already Existing in Database
-- **When does it happen ?** - First time setup , when **vagrant-up** is run and flask1 and flask2 docker logs are observed
-- **How is it fixed?** - If running setup is brought down with compose, and Vagrant file reloaded again - both show up correct. 
