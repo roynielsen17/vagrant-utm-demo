@@ -43,13 +43,13 @@ $vagrant up
     default: Container nginx_container  Started
     default: API Services, NGINX, and MySQL deployed successfully.
 
-NOTE - You will be prompoted for VM Download  by UTM - Click ALLOW -> Wait for It -> Mount your Milestone-5 Path (from your cloned dir setup) -> Click yes on CLI
+NOTE - You will be prompoted for VM Download  by UTM - Click ALLOW -> Wait for It -> Mount your project path (from your cloned dir setup) -> Click yes on CLI
 - this is a MacOS specific constraint being addressed. 
 
 ```
 
 
-**Step-4**: Services will be up on your ifconfig-a (newly created bridged network IP) 
+**Step-4**: You are good to go - Services will be up on your ifconfig-a (newly created bridged network IP) 
 ```
 bridge100: flags=8a63<UP,BROADCAST,SMART,RUNNING,ALLMULTI,SIMPLEX,MULTICAST> mtu 1500
         options=3<RXCSUM,TXCSUM>
