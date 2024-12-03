@@ -1,10 +1,8 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/jammy64"
-
+  config.vm.box = "utm/debian11"
   # Set VM properties for UTM
   config.vm.provider "utm" do |u|
-    u.utm_file_url = "https://github.com/naveenrajm7/utm-box/releases/download/debian-11/debian_vagrant_utm.zip"
-    u.name = "ubuntu_vm"
+    u.name = "debian_vm"
     u.memory = "2048"   # 4GB memory
     u.cpus = 4          # 4 CPUs
     u.directory_share_mode = "virtFS"
