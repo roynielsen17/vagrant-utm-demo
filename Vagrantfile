@@ -9,6 +9,24 @@ Vagrant.configure("2") do |config|
     #u.directory_share_mode = "webDAV"  # Use webDAV for manual directory sharing
   end
 
+  # Enable X11 apps
+  config.ssh.forward_x11 = true
+  config.ssh.forward_agent = true
+
+  config.vm.provision "shell", inline: <<-SHELL
+    # Update package list
+    sudo apt-get update
+
+    # Install xauth (required for X11 forwarding)
+    sudo apt-get install -y xauth
+
+    # Install a lightweight X11 test application (e.g., x11-apps includes xclock)
+    sudo apt-get install -y x11-apps
+
+    # Optional: Install other GUI tools as needed
+    # sudo apt-get install -y xfce4 firefox
+  SHELL
+
   # Provisioning all requirements using a shell script
   config.vm.provision "shell", path: "provision.sh"
 
